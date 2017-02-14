@@ -3,7 +3,7 @@ import './App.css';
 
 import Header from './Header.jsx'
 import {TodoForm, TodoList} from './components/todo'
-import {addTodo, generateId} from './lib/todoHelpers'
+import {addTodo, generateId, findById, toggleTodo, updateTodo} from './lib/todoHelpers'
 
 class App extends Component {
 
@@ -15,6 +15,13 @@ class App extends Component {
       {id: 3, name: 'Build an amazing app', isComplete: false}
     ],
     currentTodo: ''
+  }
+
+  handleToggle = (id) => {
+    const todo = findById(id, this.state.todos)
+    const toggled = toggleTodo(todo)
+    const updatedTodos = updateTodo(this.state.todos, toggled)
+    this.setState({todos: updatedTodos})
   }
 
   handleSubmit = (evt) => {
@@ -45,7 +52,7 @@ class App extends Component {
         <TodoForm handleInputChange={this.handleInputChange}
           currentTodo={this.state.currentTodo}
           handleSubmit={this.handleSubmit} />
-        <TodoList todos={this.state.todos} />
+        <TodoList handleToggle={this.handleToggle} todos={this.state.todos} />
       </div>
     );
   }
