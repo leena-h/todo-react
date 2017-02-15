@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import Header from './Header.jsx'
 import {TodoForm, TodoList} from './components/todo'
 import {addTodo, generateId, findById, toggleTodo, updateTodo} from './lib/todoHelpers'
