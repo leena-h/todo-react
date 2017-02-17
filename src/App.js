@@ -4,17 +4,19 @@ import Header from './Header.jsx'
 import {TodoForm, TodoList, Footer} from './components/todo'
 import {addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filterTodos} from './lib/todoHelpers'
 import {pipe, partial} from './lib/utils'
+import {loadTodos} from './lib/todoService'
 
 class App extends Component {
 
   // ES2016 property initializer syntax
   state = {
-    todos: [
-      {id: 1, name: 'Learn about components', isComplete: true},
-      {id: 2, name: 'Learn about routers', isComplete: false},
-      {id: 3, name: 'Build an amazing app', isComplete: false}
-    ],
+    todos: [],
     currentTodo: ''
+  }
+
+  componentDidMount(){
+    loadTodos()
+      .then(todos => this.setState({todos}))
   }
 
   static contextTypes = {
