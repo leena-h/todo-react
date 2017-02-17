@@ -53,6 +53,9 @@ class App extends Component {
 
   handleEmptySubmit = (evt) => {
     evt.preventDefault()
+    this.setState({
+      errorMessage: 'Please supply a todo name'
+    })
   }
 
   handleInputChange = (evt) => {
